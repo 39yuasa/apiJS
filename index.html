@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sample_GoogleMap_</title>
+
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        const service = new google.maps.DistanceMatrixService();
+        // instantiate Distance Matrix service
+        const matrixOptions = {
+          origins: ["東京駅"], // technician locations
+          destinations: ["新宿駅"], // customer address
+          travelMode: "DRIVING",
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+        };
+        service.getDistanceMatrix(matrixOptions, callback);
+        function callback(response, status) {
+          if (status !== "OK") {
+            alert("Error with distance matrix");
+            return;
+          }
+          console.log(response);
+        }
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=ここにkeyが入っています&callback=initMap"
+    ></script>
+  </body>
+</html>
